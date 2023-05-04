@@ -17,6 +17,7 @@ server.listen(PORT, () => console.log(`Server is running on Port ${PORT} --> ` +
 
 // Handle a socket connection request
 
+/*
 const connections = [null, null];
 
 io.on('connection', (socket) => {
@@ -78,3 +79,5 @@ io.on('connection', (socket) => {
 	// On correct types
 	// socket.on('draw', (pokemonIdx) => {});
 });
+
+*/
