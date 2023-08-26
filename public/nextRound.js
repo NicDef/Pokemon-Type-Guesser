@@ -27,23 +27,4 @@ function nextRound() {
 	return types;
 }
 
-function nextRoundMulti(pokemonIdx) {
-	const types = [];
-	const suggestedTypes = [];
-	let name;
-	let imageSrc;
-
-	getData(baseUrl + pokemonIdx).then((data) => {
-		name = data.name;
-		imageSrc = data.sprites.front_default;
-		for (let i = 0; i < data.types.length; i++) {
-			types.push(data.types[i].type.name);
-		}
-
-		return drawMulti(name, imageSrc, types, suggestedTypes);
-	});
-
-	return { types, allTypes };
-}
-
 // export default nextRound;
