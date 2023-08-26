@@ -103,39 +103,6 @@ function draw(name, imageSrc, types) {
 	return types;
 }
 
-function drawMulti(name, imageSrc, types, suggestedTypes) {
-	const imgElem = document.querySelector('#pokemonImage');
-	const nameElem = document.querySelector('#name');
-
-	imgElem.src = imageSrc;
-	nameElem.innerHTML = name;
-
-	const keys = Object.keys(allTypes);
-
-	const optionTypes = removeKeys(allTypes, keys, types);
-
-	// Map any number group to any other number group
-	const fisherYatesShuffle = (deck) => {
-		for (var i = deck.length - 1; i > 0; i--) {
-			const swapIndex = Math.floor(Math.random() * (i + 1));
-			const currentCard = deck[i];
-			const cardToSwap = deck[swapIndex];
-			deck[i] = cardToSwap;
-			deck[swapIndex] = currentCard;
-		}
-
-		return deck;
-	};
-	const shuffled = fisherYatesShuffle(optionTypes);
-
-	const conversion = {};
-	// i + 1 because we want 1-9 as keys and arrays start at index 0
-	shuffled.forEach((e, i) => (conversion[i + 1] = e));
-	suggestedTypes = conversion;
-
-	return types;
-}
-
 function displaySuggestedTypes(suggestedTypes) {
 	const typeImgElem = document.querySelectorAll('.img');
 	for (let i = 0; i < typeImgElem.length; i++) {
