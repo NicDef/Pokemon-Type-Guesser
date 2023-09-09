@@ -52,6 +52,7 @@ function arraysEqual(a, b) {
 
 let correctTypes = [];
 let selectedTypes = [];
+let lives = 3;
 
 let page = window.location.href.replace(/(.*)\//, '');
 
@@ -60,7 +61,19 @@ let page = window.location.href.replace(/(.*)\//, '');
 //////////////////////////////////////////
 
 // Start singleplayer mode
-function init() {
+function initSingleplayer() {
+	for (let i = 0; i < lives; i++) {
+		const heart = document.createElement('img');
+		heart.classList.add('heart');
+		heart.id = 'heart';
+		heart.src = './img/heart.png';
+		livesElem.appendChild(heart);
+	}
+
+	startRound();
+}
+
+function startRound() {
 	correctTypes = nextRound();
 	submit.setAttribute('disabled', true);
 	selected = 0;
@@ -69,7 +82,7 @@ function init() {
 }
 
 // Decides whether to start a automatically a Singleplayer game or not, based on your url
-if (page == 'index.html' || page == '') init();
+if (page == 'index.html' || page == '') initSingleplayer();
 else wrapper.style.display = 'none';
 
 // Read and handle submitted types for single player mode
@@ -86,7 +99,7 @@ submit.addEventListener('click', () => {
 
 	if (selectedTypes.length < 1) {
 		alert("Error: The selected types couldn't be read");
-		return init();
+		return startRound();
 	}
 
 	if (!arraysEqual(selectedTypes, correctTypes)) {
@@ -106,5 +119,5 @@ submit.addEventListener('click', () => {
 
 	score.innerHTML++;
 
-	return init();
+	return startRound();
 });
