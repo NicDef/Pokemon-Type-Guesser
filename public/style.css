@@ -34,6 +34,7 @@ body {
 	box-sizing: border-box;
 }
 
+.lives,
 img,
 .c-row,
 button span {
@@ -103,6 +104,26 @@ button span {
 	padding: 0.5em;
 }
 
+.heart {
+	width: 2em;
+	height: auto;
+	margin: 0.25em;
+	filter: drop-shadow(10px 5px 10px #00000070);
+}
+
+.fade-out {
+	animation: fade-out 1000ms ease-out forwards;
+}
+
+@keyframes fade-out {
+	10% {
+		filter: grayscale(0.1);
+	}
+	100% {
+		filter: grayscale(0.9);
+	}
+}
+
 .score {
 	display: flex;
 	justify-content: center;
@@ -142,15 +163,17 @@ button span {
 .pokemon-image-ctn {
 	height: 20em;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .pokemon-image-ctn img {
-	padding: 2em;
+	padding: 2em 0em 2em 0em;
 	height: 20em;
 	width: auto;
 	max-width: 100%;
 	position: absolute;
-	transform: translateX(-10em);
 	filter: drop-shadow(10px 5px 10px #00000070);
 }
 

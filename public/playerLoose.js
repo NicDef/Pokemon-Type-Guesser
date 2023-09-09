@@ -18,6 +18,7 @@ function playerLoose(selectedTypes, correctTypes, score) {
 	const pokemonContainer = document.querySelector('.pokemon-ctn');
 	const pokemonImgContainer = document.querySelector('.pokemon-image-ctn');
 	const typesCtn = document.querySelector('.types-ctn');
+	const livesElem = document.querySelector('.lives');
 
 	const typeImgElems = document.querySelectorAll('.img');
 
@@ -26,6 +27,7 @@ function playerLoose(selectedTypes, correctTypes, score) {
 	scoreCtn.classList.add('score-lose');
 	pokemonContainer.classList.add('pokemon-ctn-lose');
 	pokemonImgContainer.style.display = 'none';
+	livesElem.style.display = 'none';
 	typesCtn.classList.add('types-ctn-lose');
 
 	if (score > 0) animateValue(scoreCount, 0, score, (score * 60) / 0.1);

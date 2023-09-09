@@ -5,6 +5,7 @@
 const score = document.querySelector('#score');
 const typeImgElem = document.querySelectorAll('.img');
 const submit = document.querySelector('.submit');
+const livesElem = document.querySelector('.lives');
 
 let selected = 0;
 let selectedElems = [];
@@ -60,6 +61,7 @@ let correctTypes = [];
 let selectedTypes = [];
 
 let multiPlayerTypeParams = [];
+let lives;
 
 let page = window.location.href.replace(/(.*)\//, '');
 
@@ -193,6 +195,19 @@ function playerReady(num) {
 // Start singleplayer mode
 function initSingleplayer() {
 	gameMode = 'singleplayer';
+	lives = 3;
+	for (let i = 0; i < lives; i++) {
+		const heart = document.createElement('img');
+		heart.classList.add('heart');
+		heart.id = 'heart';
+		heart.src = './img/heart.png';
+		livesElem.appendChild(heart);
+	}
+
+	startRound();
+}
+
+function startRound() {
 	correctTypes = nextRound();
 	submit.setAttribute('disabled', true);
 	selected = 0;
@@ -218,15 +233,25 @@ submit.addEventListener('click', () => {
 
 	if (selectedTypes.length < 1) {
 		alert("Error: The selected types couldn't be read");
-		return initSingleplayer();
+		return startRound();
 	}
 
 	if (!arraysEqual(selectedTypes, correctTypes)) {
-		playerLoose(selectedTypes, correctTypes, score.innerHTML);
-		return;
+		lives--;
+
+		if (lives < 0) {
+			return playerLoose(selectedTypes, correctTypes, score.innerHTML);
+		}
+
+		const hearts = document.querySelectorAll('#heart');
+		let lastChild = hearts[hearts.length - (3 - lives)];
+		// lastChild.style.filter = 'grayscale(0.8)';
+		lastChild.classList.add('fade-out');
+
+		return startRound();
 	}
 
 	score.innerHTML++;
 
-	return initSingleplayer();
+	return startRound();
 });
